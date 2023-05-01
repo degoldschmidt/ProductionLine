@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<title>Smoothed Radar Chart</title>
+	<title>Play Style Match-Up Radar Chart using d3.js</title>
 
 	<!-- Google fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -28,16 +28,26 @@
 			font-family: 'Raleway', sans-serif;
 			fill: #333333;
 		}
+
+		.graphbox {
+			border: 1px outset lightgray;
+			text-align: center;
+			font-family: 'Raleway', sans-serif;
+		}
+
 	</style>
 </head>
 
 <body>
 	<!--- <h1>The Production Line</h1>/ -->
-	<h1 style="font-size: 24px; text-align: left;">Play Style Match-Up Radar Chart using d3.js</h1>
+	<h1 style="font-size: 24px; text-align: left;">Western Semifinals: (6) Golden State Warriors vs. (7) Los Angeles Lakers</h1>
 
-	<h3>Western Semifinals: (6) Golden State Warriors vs. (7) Los Angeles Lakers</h3>
-	<div class="radarChart" style="display: inline-flex;"></div>
-	<div class="radarChart2" style="display: inline-flex;"></div>
+	<div class="graphbox">
+	<div class="radarChart_L" style="display: inline-flex;"></div>
+	<div class="radarChart_R" style="display: inline-flex;"></div>
+	<h3 style="font-style: italic; font-size: 12pt;">percentile of points per play into one of points scored vs. allowed over 100 possessions
+			(in %)</h3>
+	</div>
 	<script>
 		//////////////////////////////////////////////////////////////
 		//////////////////////// Set-Up //////////////////////////////
@@ -129,7 +139,7 @@
 		};
 
 		// Draw the chart, get a reference the created svg element :
-		let svg_radar1 = RadarChart(".radarChart", data, radarChartOptions);
+		let svg_radar1 = RadarChart(".radarChart_L", data, radarChartOptions);
 		var colorRadar = d3.scaleOrdinal().range(["#542583", "#FDBA21", "#FDB827", "#006BB8"]);
 		//////////////////////////////////////////////////////////////
 		///// Second example /////////////////////////////////////////
@@ -148,7 +158,7 @@
 		};
 
 		// Draw the chart, get a reference the created svg element :
-		let svg_radar2 = RadarChart(".radarChart2", data2, radarChartOptions2);
+		let svg_radar2 = RadarChart(".radarChart_R", data2, radarChartOptions2);
 	</script>
 </body>
 

@@ -124,6 +124,32 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 	//Wrapper for the grid & axes
 	let axisGrid = g.append("g").attr("class", "axisWrapper");
 
+
+	//Create a radial Sun-like gradient
+	var defs = axisGrid.append("defs");
+	defs.append("radialGradient")
+		.attr("id", "sun-gradient")
+		.attr("r", "100%")	//not really needed, since 50% is the default
+		.selectAll("stop")
+		.data([
+			{ offset: "0%", color: "#424242" },
+			{ offset: "20%", color: "#ffffff" },
+			{ offset: "100%", color: "#e5fbe5" }
+		])
+		.enter().append("stop")
+		.attr("offset", function (d) { return d.offset; })
+		.attr("stop-color", function (d) { return d.color; });
+	// Gradient circle
+	axisGrid.selectAll(".levels")
+		.data(d3.range(1, 2).reverse())
+		.enter()
+		.append("circle")
+		.attr("class", "gridCircle")
+		.attr("r", radius)
+		.style("fill", "url(#sun-gradient)")
+		.style("stroke", "#CDCDCD")
+		.style("filter", "url(#glow)");
+
 	//Draw the background circles
 	axisGrid.selectAll(".levels")
 		.data(d3.range(1, (cfg.levels + 1)).reverse())
@@ -131,10 +157,10 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 		.append("circle")
 		.attr("class", "gridCircle")
 		.attr("r", d => radius / cfg.levels * d)
-		.style("fill", "#CDCDCD")
+		.style("fill", "none")
 		.style("stroke", "#CDCDCD")
-		.style("fill-opacity", cfg.opacityCircles)
 		.style("filter", "url(#glow)");
+
 
 	//Text indicating at what % each level is
 	axisGrid.selectAll(".axisLabel")
@@ -162,11 +188,11 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 	axis.append("line")
 		.attr("x1", 0)
 		.attr("y1", 0)
-		.attr("x2", (d, i) => rScale(maxValue * 1.1) * cos(angleSlice * i - HALF_PI))
-		.attr("y2", (d, i) => rScale(maxValue * 1.1) * sin(angleSlice * i - HALF_PI))
+		.attr("x2", (d, i) => rScale(maxValue * 1.0) * cos(angleSlice * i - HALF_PI))
+		.attr("y2", (d, i) => rScale(maxValue * 1.0) * sin(angleSlice * i - HALF_PI))
 		.attr("class", "line")
-		.style("stroke", "white")
-		.style("stroke-width", "2px");
+		.style("stroke", "#CDCDCD")
+		.style("stroke-width", "1px");
 
 	//Append the labels at each axis
 	axis.append("text")
