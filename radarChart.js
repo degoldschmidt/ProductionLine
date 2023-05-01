@@ -242,7 +242,7 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 		.attr("cx", (d, i) => rScale(d.value) * cos(angleSlice * i - HALF_PI))
 		.attr("cy", (d, i) => rScale(d.value) * sin(angleSlice * i - HALF_PI))
 		.style("fill", (d) => cfg.color(d.id))
-		.style("fill-opacity", 0.8);
+		.style("fill-opacity", 0.95);
 
 	/////////////////////////////////////////////////////////
 	//////// Append invisible circles for tooltip ///////////
@@ -310,7 +310,7 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 			.enter()
 			.append("rect")
 			.attr("x", cfg.w - 65)
-			.attr("y", (d, i) => i * 20)
+			.attr("y", (d, i) => (1 - i) * 20)
 			.attr("width", 10)
 			.attr("height", 10)
 			.style("fill", (d, i) => cfg.color(i));
@@ -320,7 +320,7 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
 			.enter()
 			.append("text")
 			.attr("x", cfg.w - 52)
-			.attr("y", (d, i) => i * 20 + 9)
+			.attr("y", (d, i) => (1 - i) * 20 + 9)
 			.attr("font-size", "11px")
 			.attr("fill", "#737373")
 			.text(d => d);

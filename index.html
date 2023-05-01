@@ -53,6 +53,19 @@
 
 		var data = [
 			{
+				name: 'DEF: Golden State Warriors',
+				axes: [{ axis: "Transition", value: 66.7 },
+				{ axis: "Isolation", value: 43.3 },
+				{ axis: "PRBallHandler", value: 66.7 },
+				{ axis: "PRRollman", value: 46.7 },
+				{ axis: "Postup", value: 46.7 },
+				{ axis: "Spotup", value: 43.3 },
+				{ axis: "Handoff", value: 70.0 },
+				{ axis: "Cut", value: 60. },
+				{ axis: "OffScreen", value: 20. },
+				{ axis: "OffRebound", value: 80. }]
+			},
+			{
 				name: 'OFF: Los Angeles Lakers',
 				axes: [{ axis: "Transition", value: 80. },
 				{ axis: "Isolation", value: 76.7 },
@@ -64,36 +77,11 @@
 				{ axis: "Cut", value: 63.3 },
 				{ axis: "OffScreen", value: 23.3 },
 				{ axis: "OffRebound", value: 56.7 }],
-			},
-			{
-				name: 'DEF: Golden State Warriors',
-				axes:  [{ axis: "Transition", value: 66.7 },
-				{ axis: "Isolation", value: 43.3 },
-				{ axis: "PRBallHandler", value: 66.7 },
-				{ axis: "PRRollman", value: 46.7 },
-				{ axis: "Postup", value: 46.7 },
-				{ axis: "Spotup", value: 43.3 },
-				{ axis: "Handoff", value: 70.0 },
-				{ axis: "Cut", value: 60. },
-				{ axis: "OffScreen", value: 20. },
-				{ axis: "OffRebound", value: 80. }]
 			}
+
 		];
 
 		var data2 = [
-				{ //[23.3, 46.7, 40.0, 66.7, 66.7, 56.7, 53.3, 73.3, 63.3, 60.0]
-					name: 'OFF: Golden State Warriors',
-					axes: [{ axis: "Transition", value: 23.3 },
-					{ axis: "Isolation", value: 46.7 },
-					{ axis: "PRBallHandler", value: 40.0 },
-					{ axis: "PRRollman", value: 66.7 },
-					{ axis: "Postup", value: 66.7 },
-					{ axis: "Spotup", value: 56.7 },
-					{ axis: "Handoff", value: 53.3 },
-					{ axis: "Cut", value: 73.3 },
-					{ axis: "OffScreen", value: 63.3 },
-					{ axis: "OffRebound", value: 60. }],
-				},
 				{ //[6.7, 20.0, 33.3, 90.0, 30.0, 96.7, 26.7, 80.0, 83.3, 13.3]
 					name: 'DEF: Los Angeles Lakers',
 					axes: [{ axis: "Transition", value: 6.7 },
@@ -106,6 +94,19 @@
 					{ axis: "Cut", value: 80. },
 					{ axis: "OffScreen", value: 83.3 },
 					{ axis: "OffRebound", value: 13.3 }]
+				},
+				{ //[23.3, 46.7, 40.0, 66.7, 66.7, 56.7, 53.3, 73.3, 63.3, 60.0]
+				name: 'OFF: Golden State Warriors',
+				axes: [{ axis: "Transition", value: 23.3 },
+				{ axis: "Isolation", value: 46.7 },
+				{ axis: "PRBallHandler", value: 40.0 },
+				{ axis: "PRRollman", value: 66.7 },
+				{ axis: "Postup", value: 66.7 },
+				{ axis: "Spotup", value: 56.7 },
+				{ axis: "Handoff", value: 53.3 },
+				{ axis: "Cut", value: 73.3 },
+				{ axis: "OffScreen", value: 63.3 },
+				{ axis: "OffRebound", value: 60. }],
 				}
 			];
 
@@ -113,6 +114,8 @@
 		////// First example /////////////////////////////////////////
 		///// (not so much options) //////////////////////////////////
 		//////////////////////////////////////////////////////////////
+		var colorRadar = d3.scaleOrdinal().range(["#FDBA21", "#542583", "#006BB8", "#FDB827"]);
+
 		var radarChartOptions = {
 			w: 290,
 			h: 350,
@@ -120,14 +123,14 @@
 			levels: 5,
 			maxValue: 100,
 			roundStrokes: true,
-			color: d3.scaleOrdinal().range(["#542583", "#FDBA21", "#FDB827", "#006BB8"]),
+			color: colorRadar,
 			format: '.0f',
 			legend: { title: 'Team', translateX: 60, translateY: -10 },
 		};
 
 		// Draw the chart, get a reference the created svg element :
 		let svg_radar1 = RadarChart(".radarChart", data, radarChartOptions);
-
+		var colorRadar = d3.scaleOrdinal().range(["#542583", "#FDBA21", "#FDB827", "#006BB8"]);
 		//////////////////////////////////////////////////////////////
 		///// Second example /////////////////////////////////////////
 		///// Chart legend, custom color, custom unit, etc. //////////
@@ -139,7 +142,7 @@
 			maxValue: 100,
 			levels: 5,
 			roundStrokes: true,
-			color: d3.scaleOrdinal().range(["#FDBA21", "#542583", "#006BB8", "#FDB827"]),
+			color: colorRadar,
 			format: '.0f',
 			legend: { title: '', translateX: 60, translateY: -10 },
 		};
